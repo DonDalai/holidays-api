@@ -1,0 +1,51 @@
+openapi: 3.0.0
+info:
+  title: Ejemplo de Documentación de API con Swagger
+  version: 1.0.0
+paths:
+  /holidays:
+    get:
+      summary: Obtener días festivos
+      description: Obtiene una lista de días festivos según el tipo y las fechas específicas.
+      parameters:
+        - name: type
+          in: query
+          description: Tipo de día festivo (Civil o Religioso)
+          required: true
+          schema:
+            type: string
+            enum: [Civil, Religious]
+        - name: start_date
+          in: query
+          description: Fecha de inicio del rango de días festivos (YYYY-MM-DD)
+          required: false
+          schema:
+            type: string
+            format: date
+        - name: end_date
+          in: query
+          description: Fecha de fin del rango de días festivos (YYYY-MM-DD)
+          required: false
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          description: Lista de días festivos encontrados
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    date:
+                      type: string
+                      format: date
+                    type:
+                      type: string
+                      enum: [Civil, Religious]
+        '400':
+          description: Error en la solicitud
