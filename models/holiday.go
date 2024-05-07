@@ -7,3 +7,8 @@ type Holiday struct {
 	Inalienable bool   `json:"inalienable"`
 	Extra       string `json:"extra"`
 }
+
+type HolidayResponse struct {
+	Status string    `json:"status"`
+	Data   []Holiday `json:"data"`
+}
